@@ -1,0 +1,11 @@
+# Self-registration patch for vibeos-example-override.
+#
+# `dsh.bundle.patch` in package.json makes
+# `dsh plugin --profile web add file:$PWD/examples/vibeos-example-override`
+# both install the package AND append this insert to the profile's bundle
+# layer, so the row activates without editing cordis.patch.yml by hand.
+#
+# The row carries no config: component overrides are code, not configuration.
+- insert:
+    - id: vibeos-example-override
+      name: vibeos-example-override

@@ -1,0 +1,70 @@
+/* Token contract from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css; the mapping itself is new for dsh-vibeos.
+ * Original license: MIT. */
+
+/* harness — the desktop borrows the host DSH palette. #vibeos-root lives under
+ * <body>, where the shell defines the --dsw-* tokens, so light/dark and any
+ * registered DSH theme are followed with no JS. Tokens left unmapped (sheen,
+ * chart-*, sidebar-*) keep the base light/dark values. */
+:where(#vibeos-root)[data-skin="harness"] {
+  --font-sans: var(--dsw-font-family, ui-sans-serif, system-ui, sans-serif);
+
+  --background: var(--dsw-alias-bg-base);
+  --foreground: var(--dsw-alias-label-primary);
+  --card: var(--dsw-alias-bg-layer-1);
+  --card-foreground: var(--dsw-alias-label-primary);
+  --popover: var(--dsw-alias-bg-overlay, var(--dsw-alias-bg-layer-1));
+  --popover-foreground: var(--dsw-alias-label-primary);
+
+  --primary: var(--dsw-alias-brand-primary);
+  --primary-foreground: var(--dsw-alias-brand-primary-invert, #fff);
+  --secondary: var(--dsw-alias-bg-layer-2);
+  --secondary-foreground: var(--dsw-alias-label-primary);
+  --muted: var(--dsw-alias-bg-layer-2);
+  --muted-foreground: var(--dsw-alias-label-secondary);
+  --accent: var(--dsw-alias-interactive-bg-hover, var(--dsw-alias-bg-layer-2));
+  --accent-foreground: var(--dsw-alias-label-primary);
+  --destructive: var(--dsw-alias-state-error-primary);
+
+  --border: var(--dsw-alias-border-l2);
+  --input: var(--dsw-alias-border-l1, var(--dsw-alias-border-l2));
+  --ring: var(--dsw-alias-brand-primary);
+
+  --brand: var(--dsw-alias-brand-primary);
+  --brand-foreground: var(--dsw-alias-brand-primary-invert, #fff);
+  --run: var(--dsw-alias-state-success-primary);
+  --warn: var(--dsw-alias-state-warn-primary);
+  --idle: var(--dsw-alias-label-tertiary, var(--dsw-alias-label-secondary));
+
+  --desktop: var(--dsw-alias-bg-module-platform, var(--dsw-alias-bg-layer-2));
+  --window-titlebar: var(--dsw-alias-bg-layer-2);
+}
+
+
+/* DSH exposes only the tokens of its ACTIVE theme, so a VibeOS dark desktop on
+ * a light DSH page has nothing to borrow: use a neutral dark scale and keep the
+ * brand hues mapped to DSH. */
+:where(#vibeos-root).vibe-dark[data-skin="harness"] {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.245 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.27 0.01 260);
+  --accent-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.245 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --border: oklch(0.3 0 0);
+  --input: oklch(0.205 0 0);
+  --idle: oklch(0.45 0 0);
+  --desktop: oklch(0.115 0 0);
+  --window-titlebar: oklch(0.21 0 0);
+  --sheen: rgba(255, 255, 255, 0.06);
+  --primary: var(--dsw-alias-button-primary-fill, #3d7be0);
+  --primary-foreground: var(--dsw-alias-brand-primary-invert, #fff);
+  --brand: var(--dsw-alias-brand-primary, #5b9dff);
+  --brand-foreground: var(--dsw-alias-brand-primary-invert, #0d1220);
+  --ring: var(--dsw-alias-brand-primary, #5b9dff);
+}

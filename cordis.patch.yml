@@ -1,0 +1,9 @@
+# dsh-vibeos — VibeOS desktop for DSH (credit: https://github.com/benis-me/VibeOS)
+# Inserted into the profile's composition when this bundle is installed
+# (`dsh plugin --profile web add file:/path/to/dsh-vibeos`).
+- insert:
+    - id: vibeos
+      name: dsh-vibeos
+      # config:            # optional example
+      #   fast: { model: { provider: deepseek-official, model: deepseek-v4-flash } }
+      #   skins: { custom: [{ name: terminal-green, label: Terminal, css: '[data-skin="terminal-green"]{--background:#001100}' }] }

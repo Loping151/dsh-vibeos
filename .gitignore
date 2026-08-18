@@ -1,0 +1,6 @@
+node_modules/
+*.tsbuildinfo
+lib/*.map
+*.log
+.DS_Store
+docs/assets/gen/

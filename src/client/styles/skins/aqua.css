@@ -1,0 +1,351 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css (Mac OS X "Aqua" token block, chrome, .ai-surface controls, native widgets, menu).
+ * Adapted for DeepSeek Harness (dsh-vibeos): selectors re-scoped to #vibeos-root; titlebar height stays the 36px shell constant. Original license: MIT. */
+
+/* Mac OS X "Aqua" — glossy, rounded, Lucida Grande. Dock geometry is shared
+ * with devdock (see skins/devdock.css). */
+:where(#vibeos-root)[data-skin="aqua"] {
+  --radius: 0.7rem;
+  --font-sans: "Lucida Grande", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  --background: oklch(0.97 0 0);
+  --foreground: oklch(0.2 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0 0);
+  --popover: oklch(0.99 0 0);
+  --popover-foreground: oklch(0.2 0 0);
+
+  --primary: oklch(0.55 0.17 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.95 0 0);
+  --muted-foreground: oklch(0.5 0 0);
+  --accent: oklch(0.9 0.04 255);
+  --accent-foreground: oklch(0.25 0.05 255);
+  --destructive: oklch(0.58 0.22 27);
+
+  --border: oklch(0.85 0 0);
+  --input: oklch(1 0 0);
+  --ring: oklch(0.6 0.16 255);
+
+  --brand: oklch(0.55 0.17 255);
+  --brand-foreground: oklch(0.99 0 0);
+  /* base (light) values; the dark block below mirrors them
+     pinned so the fixed Aqua look survives the dark theme */
+  --run: oklch(0.6 0.15 150);
+  --warn: oklch(0.72 0.15 70);
+  --idle: oklch(0.75 0 0);
+  --desktop: oklch(0.6 0.1 245);
+  --window-titlebar: oklch(0.92 0 0);
+  --sheen: rgba(255, 255, 255, 0.6);
+}
+
+/* ---------------------------------- chrome -------------------------------- */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window {
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  border-radius: 11px;
+  box-shadow:
+    0 18px 50px -12px rgba(0, 0, 0, 0.45),
+    0 0 0 0.5px rgba(0, 0, 0, 0.1);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window.win-glass {
+  background-color: color-mix(in oklab, var(--card) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-titlebar {
+  position: relative;
+  /* icon + name sit together, centered; lights are pinned left (absolute). */
+  justify-content: center;
+  border-bottom: 1px solid #9b9b9b;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.03) 0 1px, transparent 1px 2px),
+    linear-gradient(to bottom, #fcfcfc, #d6d6d6);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window:not([data-focused]) .vibe-titlebar {
+  background: linear-gradient(to bottom, #f4f4f4, #e6e6e6);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-title {
+  flex: 0 0 auto;
+  max-width: 60%;
+  text-align: center;
+  color: #2b2b2b;
+  font-weight: 600;
+  font-size: 12px;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+/* Traffic-light buttons pinned LEFT, out of flow so they don't push the
+ * centered icon+name off-center. */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtns {
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  color: transparent;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn svg {
+  width: 8px;
+  height: 8px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtns:hover .vibe-winbtn {
+  color: rgba(0, 0, 0, 0.55);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn-close {
+  order: 1;
+  background: radial-gradient(circle at 50% 35%, #ff8a82, #ff5f57);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn-min {
+  order: 2;
+  background: radial-gradient(circle at 50% 35%, #ffd56b, #febc2e);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn-max {
+  order: 3;
+  background: radial-gradient(circle at 50% 35%, #6fe06f, #28c840);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-winbtn-save {
+  order: 4;
+  background: radial-gradient(circle at 50% 35%, #d8d8d8, #b0b0b0);
+}
+/* Aqua Dock — glossy translucent (geometry comes from the shared block). */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-taskbar {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, #ffffff 72%, transparent),
+    color-mix(in oklab, #d8e2ee 62%, transparent)
+  );
+  backdrop-filter: blur(16px) saturate(170%);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  box-shadow:
+    0 8px 22px -10px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-startbtn {
+  border-radius: 12px;
+  background: linear-gradient(to bottom, #ffffff, #e3e3e3);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: inset 0 1px 0 #fff;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-taskitem[data-active] {
+  background: linear-gradient(to bottom, #8fd0ff, #3a9bff);
+  color: #fff;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-startmenu {
+  border-radius: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  box-shadow: 0 18px 50px -12px rgba(0, 0, 0, 0.45);
+}
+
+/* ------------------- form controls inside AI app content ------------------ */
+/* glossy pill buttons, rounded inputs with a blue focus glow. */
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface button {
+  min-height: 22px !important;
+  padding: 2px 15px !important;
+  color: #1a1a1a !important;
+  border: 1px solid rgba(0, 0, 0, 0.28) !important;
+  border-radius: 13px !important;
+  background: linear-gradient(
+    to bottom,
+    #ffffff 0%,
+    #fbfbfb 49%,
+    #e7e7e7 51%,
+    #f4f4f4 100%
+  ) !important;
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 2px rgba(0, 0, 0, 0.12) !important;
+}
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface button:active {
+  background: linear-gradient(to bottom, #cfe8ff, #8ec3ff) !important;
+  color: #06306b !important;
+}
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface textarea,
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface select {
+  border: 1px solid #b6b6b6 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+  padding: 4px 9px !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+}
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface input:focus,
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface textarea:focus,
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface select:focus {
+  outline: none !important;
+  border-color: #5b9dff !important;
+  box-shadow: 0 0 0 3px rgba(91, 157, 255, 0.4) !important;
+}
+
+/* ------------------- notifications + native system-app controls ----------- */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-notif {
+  border-radius: 13px;
+  background: color-mix(in oklab, #ffffff 88%, transparent);
+  color: oklch(0.2 0 0);
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow: 0 14px 42px -10px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-group {
+  border-radius: 12px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-btn,
+:where(#vibeos-root)[data-skin="aqua"] .vibe-combo {
+  border-radius: 13px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  color: #1a1a1a;
+  background: linear-gradient(to bottom, #ffffff 0%, #fbfbfb 49%, #e7e7e7 51%, #f4f4f4 100%);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 1px 2px rgba(0, 0, 0, 0.12);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-select,
+:where(#vibeos-root)[data-skin="aqua"] .vibe-input {
+  border-radius: 8px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-segmented {
+  border-radius: 9999px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-seg-btn {
+  border-radius: 9999px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-seg-btn[data-active] {
+  color: #fff;
+  background: linear-gradient(to bottom, #8fd0ff, #3a9bff);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-switch[aria-checked="true"] {
+  background: linear-gradient(to bottom, #6db6ff, #2f8bff);
+}
+
+/* ------------------- context menu ----------------------------------------- */
+/* translucent rounded glass with a glossy blue highlight. */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu {
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 6px;
+  padding: 4px;
+  background: color-mix(in oklab, #ffffff 86%, transparent);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  box-shadow:
+    0 16px 44px -12px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu-item {
+  border-radius: 5px;
+  padding: 5px 10px 5px 8px;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu-item:hover,
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu-item[data-active="true"] {
+  background: linear-gradient(to bottom, #5ca1ff, #2f7cf6);
+  color: #fff;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu-item[data-danger="true"]:hover,
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu-item[data-danger="true"][data-active="true"] {
+  background: linear-gradient(to bottom, #ff6b64, #e23b34);
+}
+
+
+/* ---- Aqua gel details ---------------------------------------------------- */
+:where(#vibeos-root)[data-skin="aqua"] .vibe-title {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+  font-weight: 600;
+  color: #222;
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-btn[data-variant="primary"],
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface button[style*="var(--primary)"] {
+  background: linear-gradient(to bottom, #8fc2f5 0%, #4b95e8 48%, #2f7bd9 52%, #63a9ef 100%) !important;
+  border: 1px solid #2b62a8 !important;
+  color: #fff !important;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-taskitem[data-active] {
+  background: color-mix(in oklab, #ffffff 55%, transparent);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 3px rgba(0, 0, 0, 0.18);
+}
+:where(#vibeos-root)[data-skin="aqua"] .vibe-startmenu,
+:where(#vibeos-root)[data-skin="aqua"] .vibe-menu {
+  background: color-mix(in oklab, #ffffff 90%, transparent);
+  color: oklch(0.2 0 0);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+}
+:where(#vibeos-root)[data-skin="aqua"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #9cc4f0, #5b9dff);
+  border-radius: 8px;
+}
+
+
+/* ---- Aqua cursors: mac arrow + beachball while busy ---------------------- */
+:where(#vibeos-root)[data-skin="aqua"],
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window,
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface {
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZD0iTTUgMiBMNSAxOSBMOS4yIDE1LjQgTDEyIDIxLjUgTDE0LjggMjAuMiBMMTIgMTQgTDE3LjUgMTQgWiIgZmlsbD0iIzAwMDAwMCIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==') 4 2, default;
+}
+:where(#vibeos-root)[data-skin="aqua"] .ai-surface[data-busy],
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window[data-busy],
+:where(#vibeos-root)[data-skin="aqua"] .vibe-window[data-busy] .ai-surface {
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNiIgaGVpZ2h0PSIyNiI+PGNpcmNsZSBjeD0iMTMiIGN5PSIxMyIgcj0iMTAiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzg4ODg4OCIgc3Ryb2tlLXdpZHRoPSIxIi8+PHBhdGggZD0iTTEzIDMgQTEwIDEwIDAgMCAxIDIyLjYgMTAgTDEzIDEzIFoiIGZpbGw9IiM0Yjk1ZTgiLz48cGF0aCBkPSJNMjIuNiAxMCBBMTAgMTAgMCAwIDEgMTguNCAyMiBMMTMgMTMgWiIgZmlsbD0iIzU3ZTBhMCIvPjxwYXRoIGQ9Ik0xOC40IDIyIEExMCAxMCAwIDAgMSA2LjEgMjAgTDEzIDEzIFoiIGZpbGw9IiNmZmM4NTciLz48cGF0aCBkPSJNNi4xIDIwIEExMCAxMCAwIDAgMSA0LjQgNy42IEwxMyAxMyBaIiBmaWxsPSIjZmY1NDcwIi8+PHBhdGggZD0iTTQuNCA3LjYgQTEwIDEwIDAgMCAxIDEzIDMgTDEzIDEzIFoiIGZpbGw9IiNiNDhlZjAiLz48L3N2Zz4=') 13 13, wait;
+}
+
+
+/* ---- Aqua dark ("Graphite night"): same gel language, dark materials ----- */
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] {
+  --background: #1c1e21;
+  --foreground: #ecedee;
+  --card: #26282c;
+  --card-foreground: #ecedee;
+  --popover: #2a2c30;
+  --popover-foreground: #ecedee;
+  --muted: #2d3035;
+  --muted-foreground: #a6abb3;
+  --accent: #2f3a4a;
+  --accent-foreground: #dbe6f5;
+  --secondary: #2d3035;
+  --secondary-foreground: #ecedee;
+  --border: #3c4046;
+  --input: #26282c;
+  --primary: #4b95e8;
+  --primary-foreground: #ffffff;
+  --brand: #6aa9f0;
+  --brand-foreground: #0b1220;
+  --ring: #6aa9f0;
+  --idle: #5a5f66;
+  --desktop: #12161c;
+  --window-titlebar: #2b2e33;
+  --sheen: rgba(255, 255, 255, 0.08);
+}
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-titlebar {
+  border-bottom: 1px solid #14161a;
+  background:
+    repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px 2px),
+    linear-gradient(to bottom, #3a3d43, #2a2d32);
+}
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-title {
+  color: #eceef2;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.55);
+}
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-taskbar {
+  background: linear-gradient(
+    to bottom,
+    color-mix(in oklab, #3a3d43 78%, transparent),
+    color-mix(in oklab, #22252a 72%, transparent)
+  );
+  border-color: rgba(0, 0, 0, 0.5);
+}
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-notif,
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-startmenu,
+:where(#vibeos-root).vibe-dark[data-skin="aqua"] .vibe-menu {
+  background: color-mix(in oklab, #2a2c30 92%, transparent);
+  color: #ecedee;
+  border-color: rgba(255, 255, 255, 0.12);
+}

@@ -1,0 +1,128 @@
+{
+  "compilerOptions": {
+    "target": "es2024",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "lib": [
+      "ES2024",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "types": [
+      "node"
+    ],
+    "declaration": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true,
+    "rewriteRelativeImportExtensions": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "rootDir": "src",
+    "outDir": "lib",
+    "baseUrl": ".",
+    "paths": {
+      "@deepseek-ai/cordis": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cordis/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/cordis/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cordis/lib/types/*"
+      ],
+      "@deepseek-ai/cordis-plugin-timer": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cordis-plugin-timer/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/cordis-plugin-timer/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cordis-plugin-timer/lib/types/*"
+      ],
+      "@deepseek-ai/cosmokit": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cosmokit/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/cosmokit/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/cosmokit/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-llm": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-llm/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-llm/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-llm/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-storage-domain": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-storage-domain/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-storage-domain/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-storage-domain/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-host-webserver": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-host-webserver/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-host-webserver/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-host-webserver/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-timeout": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-timeout/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-timeout/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-timeout/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-agent-default-model": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-agent-default-model/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-agent-default-model/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-agent-default-model/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-invariants": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-invariants/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-invariants/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-invariants/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-client-runtime/client": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-runtime/lib/types/client/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-runtime": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-runtime/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-runtime/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-runtime/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-client-ui-slots": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-slots/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-ui-slots/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-slots/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-client-ui-theme/client": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-theme/lib/types/client/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-ui-settings/client": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-settings/lib/types/client/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-ui-theme": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-theme/lib/types/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-ui-theme/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-theme/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-client-locale/client": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-locale/lib/types/client/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-locale/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-locale/lib/types/*"
+      ],
+      "@deepseek-ai/dsh-client-ui-layout/client": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-layout/lib/types/client/index.d.ts"
+      ],
+      "@deepseek-ai/dsh-client-ui-layout/*": [
+        "../../../../.dsh/profiles/node_modules/@deepseek-ai/dsh-client-ui-layout/lib/types/*"
+      ]
+    },
+    "emitDeclarationOnly": true,
+    "declarationDir": "lib/types"
+  },
+  "include": [
+    "src"
+  ]
+}

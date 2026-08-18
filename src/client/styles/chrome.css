@@ -1,0 +1,390 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/components/{window,taskbar,startmenu,notifications,settings}/** (the .vibe-* hook look, expressed there as Tailwind utilities).
+ * Adapted for DeepSeek Harness (dsh-vibeos): token-driven defaults so a skin-less desktop renders. Original license: MIT. */
+
+/* Every rule here is zero-specificity (`:where()` wraps the whole selector):
+ * component utility classes and skin rules both override these defaults. */
+
+:where(#vibeos-root .vibe-window) {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.4);
+  background: var(--card);
+  color: var(--card-foreground);
+  transition: box-shadow 0.18s ease-out;
+}
+:where(#vibeos-root .vibe-window-body) {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: var(--background);
+}
+:where(#vibeos-root .vibe-titlebar) {
+  display: flex;
+  /* Constant across skins: the prompt assembler subtracts 36px for window content size. */
+  height: 36px;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, var(--window-titlebar) 60%, transparent);
+  user-select: none;
+}
+:where(#vibeos-root .vibe-title) {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  font-weight: 500;
+}
+:where(#vibeos-root .vibe-winbtns) {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+:where(#vibeos-root .vibe-winbtn) {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--muted-foreground);
+  transition:
+    background-color 0.12s ease-out,
+    color 0.12s ease-out;
+}
+:where(#vibeos-root .vibe-winbtn:hover) {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+:where(#vibeos-root .vibe-winbtn-close:hover) {
+  background: var(--destructive);
+  color: #fff;
+}
+
+:where(#vibeos-root .vibe-taskbar) {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 9998;
+  display: flex;
+  height: var(--taskbar-h);
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-top: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 90%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+:where(#vibeos-root .vibe-taskitem) {
+  display: flex;
+  height: 32px;
+  max-width: 11rem;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 12px;
+  transition: background-color 0.12s ease-out;
+}
+:where(#vibeos-root .vibe-taskitem:hover) {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+:where(#vibeos-root .vibe-taskitem[data-active]) {
+  background: color-mix(in oklab, var(--accent) 90%, var(--foreground));
+  color: var(--accent-foreground);
+}
+:where(#vibeos-root .vibe-taskitem-label) {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+:where(#vibeos-root .vibe-startbtn) {
+  display: flex;
+  height: 32px;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.12s ease-out;
+}
+:where(#vibeos-root .vibe-startbtn:hover, #vibeos-root .vibe-startbtn[data-open]) {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+:where(#vibeos-root .vibe-startmenu) {
+  z-index: 9999;
+  width: 20rem;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.4);
+  background: color-mix(in oklab, var(--popover) 95%, transparent);
+  color: var(--popover-foreground);
+  box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+:where(#vibeos-root .vibe-startsearch) {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--card);
+  color: inherit;
+  text-align: left;
+}
+:where(#vibeos-root .vibe-startsection) {
+  margin-bottom: 4px;
+}
+:where(#vibeos-root .vibe-startapp) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 12px;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: inherit;
+  text-align: center;
+}
+:where(#vibeos-root .vibe-startapp:hover) {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+:where(#vibeos-root .vibe-tray-area) {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 4px;
+}
+:where(#vibeos-root .vibe-tray) {
+  position: relative;
+  display: flex;
+  width: 32px;
+  height: 32px;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: calc(var(--radius) - 2px);
+  background: transparent;
+  color: var(--muted-foreground);
+  transition:
+    background-color 0.12s ease-out,
+    color 0.12s ease-out;
+}
+:where(#vibeos-root .vibe-tray:hover) {
+  background: var(--accent);
+  color: var(--foreground);
+}
+:where(#vibeos-root .vibe-clock) {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 12px;
+  font-size: 11px;
+  line-height: 1.15;
+  text-align: right;
+}
+
+:where(#vibeos-root .vibe-notif) {
+  width: 20rem;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.4);
+  background: color-mix(in oklab, var(--card) 95%, transparent);
+  color: var(--card-foreground);
+  box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Native system-app controls (Settings / Store / Activity). */
+:where(#vibeos-root .vibe-group) {
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 1.8);
+  background: var(--card);
+}
+:where(#vibeos-root .vibe-btn, #vibeos-root .vibe-combo) {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 13px;
+  transition: background-color 0.12s ease-out;
+}
+:where(#vibeos-root .vibe-btn:hover, #vibeos-root .vibe-combo:hover) {
+  background: color-mix(in oklab, var(--accent) 40%, transparent);
+}
+:where(#vibeos-root .vibe-select) {
+  width: 100%;
+  appearance: none;
+  padding: 6px 28px 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 13px;
+}
+:where(#vibeos-root .vibe-input) {
+  width: 100%;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) - 2px);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 13px;
+  outline: none;
+}
+:where(#vibeos-root .vibe-input:focus-visible, #vibeos-root .vibe-browser-url:focus-visible) {
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 40%, transparent);
+}
+:where(#vibeos-root .vibe-segmented) {
+  display: inline-flex;
+  padding: 2px;
+  border-radius: calc(var(--radius) - 2px);
+  background: color-mix(in oklab, var(--muted) 60%, transparent);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+:where(#vibeos-root .vibe-seg-btn) {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 13px;
+}
+:where(#vibeos-root .vibe-seg-btn[data-active]) {
+  background: var(--card);
+  color: var(--foreground);
+}
+:where(#vibeos-root .vibe-switch) {
+  position: relative;
+  width: 44px;
+  height: 26px;
+  border: 0;
+  border-radius: 9999px;
+  background: color-mix(in oklab, var(--foreground) 20%, transparent);
+  transition: background-color 0.15s ease-out;
+}
+:where(#vibeos-root .vibe-switch[aria-checked="true"]) {
+  background: var(--brand);
+}
+:where(#vibeos-root .vibe-switch-knob) {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 9999px;
+  background: var(--card);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  transition: left 0.15s ease-out;
+}
+:where(#vibeos-root .vibe-switch[aria-checked="true"] .vibe-switch-knob) {
+  left: 20px;
+}
+
+:where(#vibeos-root .vibe-browser-bar) {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+:where(#vibeos-root .vibe-browser-url) {
+  width: 100%;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 13px;
+  outline: none;
+}
+
+
+/* Terminal: the chrome scrolls, the model's markup just grows. Its own
+ * height:100%/overflow are overridden so the prompt trails the last line. */
+:where(#vibeos-root .vibe-term) > div:not(.vibe-term-prompt),
+:where(#vibeos-root .vibe-term) .ai-surface,
+:where(#vibeos-root .vibe-term) .ai-surface > *,
+:where(#vibeos-root .vibe-term) .ai-surface [data-vibeos-region] {
+  height: auto !important;
+  max-height: none !important;
+  overflow: visible !important;
+}
+:where(#vibeos-root .vibe-term),
+:where(#vibeos-root .vibe-term) .ai-surface,
+:where(#vibeos-root .vibe-term) .ai-surface * {
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+}
+:where(#vibeos-root .vibe-term) .ai-surface > *:not([data-vibeos-region]):not(:has([data-vibeos-region])) {
+  display: none !important;
+}
+:where(#vibeos-root .vibe-term) .ai-surface [data-vibeos-region] {
+  padding-bottom: 0 !important;
+  /* Whitespace BETWEEN the model's line divs would render as blank lines under
+   * pre-wrap; collapse it at the region and keep pre-wrap on the lines so
+   * column alignment still works. */
+  white-space: normal !important;
+}
+:where(#vibeos-root .vibe-term) .ai-surface [data-vibeos-region] > * {
+  white-space: pre-wrap;
+  margin: 0 !important;
+}
+:where(#vibeos-root .vibe-term) .ai-surface [data-vibeos-region] > *:empty {
+  display: none !important;
+}
+:where(#vibeos-root .vibe-term-prompt) {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+/* terminal shell: prompt row owned by native chrome */
+:where(#vibeos-root .vibe-term) {
+  background: var(--background);
+}
+:where(#vibeos-root .vibe-term-prompt) {
+  border: none;
+  background: transparent;
+}

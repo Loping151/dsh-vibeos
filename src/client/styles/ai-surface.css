@@ -1,0 +1,98 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css (.ai-surface block).
+ * Adapted for DeepSeek Harness (dsh-vibeos): re-scoped + paint containment. Original license: MIT. */
+
+/* AI-generated content surface: give the model a sensible base style without
+ * letting it break the OS shell. */
+:where(#vibeos-root) .ai-surface {
+  font-family: var(--font-sans);
+  color: var(--foreground);
+  line-height: 1.5;
+  /* Column flex so the generated content fills the window vertically even when
+   * the model forgot height:100%. */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  /* Hardening vs VibeOS: generated position:fixed content cannot escape the window. */
+  contain: layout paint;
+}
+/* Direct children stretch to fill remaining vertical space. min-height:0 lets
+ * inner overflow:auto regions scroll instead of overflowing. */
+:where(#vibeos-root) .ai-surface > * {
+  flex: 1 1 auto;
+  min-height: 0;
+}
+:where(#vibeos-root) .ai-surface a {
+  color: var(--brand);
+  text-decoration: underline;
+}
+:where(#vibeos-root) .ai-surface button {
+  font: inherit;
+  flex: 0 0 auto;
+}
+/* Small leaf elements directly under the surface shouldn't stretch oddly. */
+:where(#vibeos-root) .ai-surface > :is(h1, h2, h3, p, hr, button, input, label) {
+  flex: 0 0 auto;
+}
+
+:where(#vibeos-root) .ai-surface img[data-vibe-img] {
+  background-color: var(--muted);
+  background-image: linear-gradient(
+    100deg,
+    transparent 28%,
+    color-mix(in oklab, var(--foreground) 10%, transparent) 50%,
+    transparent 72%
+  );
+  background-size: 200% 100%;
+  background-repeat: no-repeat;
+  animation: vibe-img-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes vibe-img-shimmer {
+  0% {
+    background-position: 180% 0;
+  }
+  100% {
+    background-position: -180% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(#vibeos-root) .ai-surface img[data-vibe-img] {
+    animation: none;
+  }
+}
+
+
+/* ---- looping animation vocabulary the model may reference inline ---------- */
+@keyframes vibe-spin { to { transform: rotate(360deg); } }
+@keyframes vibe-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.94); }
+}
+@keyframes vibe-blink { 0%, 55% { opacity: 1; } 60%, 100% { opacity: 0; } }
+@keyframes vibe-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-22%); }
+}
+@keyframes vibe-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes vibe-marquee { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+@keyframes vibe-shimmer { from { background-position: -200% 0; } to { background-position: 200% 0; } }
+@keyframes vibe-eq {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+
+/* busy cursor rides CSS so skins can retheme it (see skins/xp.css, aqua.css) */
+:where(#vibeos-root) .ai-surface[data-busy],
+:where(#vibeos-root) .vibe-window[data-busy] {
+  cursor: progress;
+}
+
+
+/* Generated content is readable material: selection and copy must work. */
+:where(#vibeos-root) .ai-surface,
+:where(#vibeos-root) .ai-surface * {
+  user-select: text;
+  -webkit-user-select: text;
+}

@@ -1,0 +1,153 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css (macOS-family shared block + devdock chrome).
+ * Adapted for DeepSeek Harness (dsh-vibeos): selectors re-scoped to #vibeos-root. Original license: MIT. */
+
+/* devdock is the default skin: it inherits the base token set and only ships chrome.
+ * The shared macOS geometry block below also serves the aqua skin. */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) {
+  --taskbar-h: 76px; /* room for the floating Dock (maximize stops above it) */
+}
+/* Bottom bar → a centered, floating, rounded Dock. */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-taskbar {
+  inset-inline: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10px;
+  width: max-content;
+  max-width: calc(100% - 24px);
+  height: 58px;
+  padding: 6px 8px;
+  gap: 6px;
+  border-radius: 18px;
+  border-top: 0;
+}
+/* Dock items: icon-only tiles. */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-taskitem {
+  position: relative;
+  height: 44px;
+  width: 44px;
+  justify-content: center;
+  padding: 0;
+  border-radius: 12px;
+}
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-taskitem :where(svg, img) {
+  width: 26px;
+  height: 26px;
+}
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-startbtn {
+  height: 44px;
+}
+/* App name as a hover tooltip above the Dock icon. */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-taskitem-label {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  translate: -50% 0;
+  max-width: none;
+  overflow: visible;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  font-size: 11px;
+  box-shadow: 0 6px 18px -6px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease-out;
+}
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-taskitem:hover .vibe-taskitem-label {
+  opacity: 1;
+}
+/* Divider between the left content and the right tray (notifications + clock). */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-tray-area {
+  margin-left: 4px;
+  padding-left: 8px;
+  border-left: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+}
+
+/* ---- devdock: flat traffic lights + flat translucent Dock ---- */
+:where(#vibeos-root)[data-skin="devdock"] .vibe-titlebar {
+  position: relative;
+  justify-content: center;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtns {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-title {
+  flex: 0 0 auto;
+  max-width: 62%;
+  text-align: center;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn {
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border: none;
+  border-radius: 50%;
+  color: transparent;
+  /* the subtle darker ring real macOS lights have */
+  box-shadow: inset 0 0 0 0.5px rgba(0, 0, 0, 0.22);
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn svg {
+  display: none;
+}
+/* mac-accurate glyphs drawn as masks, sized to ~10px inside the 12px dot. */
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.58);
+  -webkit-mask: var(--g) center / 10px 10px no-repeat;
+  mask: var(--g) center / 10px 10px no-repeat;
+  opacity: 0;
+  transition: opacity 0.1s ease-out;
+}
+/* hover ANY light → every glyph appears (real macOS behavior) */
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtns:hover .vibe-winbtn::after {
+  opacity: 1;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-close {
+  order: 1;
+  background: #ff5f57;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-close::after {
+  --g: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%2010'%20fill='none'%20stroke='%23000'%20stroke-width='1.4'%20stroke-linecap='round'%3E%3Cpath%20d='M2.5,2.5L7.5,7.5M7.5,2.5L2.5,7.5'/%3E%3C/svg%3E");
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-min {
+  order: 2;
+  background: #febc2e;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-min::after {
+  --g: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%2010'%20fill='none'%20stroke='%23000'%20stroke-width='1.4'%20stroke-linecap='round'%3E%3Cpath%20d='M2.3,5H7.7'/%3E%3C/svg%3E");
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-max {
+  order: 3;
+  background: #28c840;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-max::after {
+  --g: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%2010'%20fill='none'%20stroke='%23000'%20stroke-width='1.4'%20stroke-linecap='round'%3E%3Cpath%20d='M5,2.3V7.7M2.3,5H7.7'/%3E%3C/svg%3E");
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-save {
+  order: 4;
+  background: #c9ccd1;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-winbtn-save::after {
+  --g: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2010%2010'%20fill='none'%20stroke='%23000'%20stroke-width='1.4'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Cpath%20d='M5,2.4V7.2M3,5.3L5,7.6L7,5.3'/%3E%3C/svg%3E");
+}
+/* Unselected window → gray traffic lights (both macOS skins). */
+:where(#vibeos-root):is([data-skin="devdock"], [data-skin="aqua"]) .vibe-window:not([data-focused]) .vibe-winbtn {
+  background: #c7c7c9;
+}
+:where(#vibeos-root)[data-skin="devdock"] .vibe-taskbar {
+  border: 1px solid color-mix(in oklab, var(--border) 70%, transparent);
+  background: color-mix(in oklab, var(--card) 55%, transparent);
+  backdrop-filter: blur(16px) saturate(1.4);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  box-shadow: 0 6px 18px -10px rgba(0, 0, 0, 0.35);
+}

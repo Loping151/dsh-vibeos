@@ -1,0 +1,36 @@
+{
+  "name": "vibeos-example-override",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Companion plugin example for dsh-vibeos: registers the 'midnight-sakura' skin and overrides the taskbar clock through require('dsh-vibeos/client').vibeos.",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "vibeos",
+    "example"
+  ],
+  "license": "MIT",
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": []
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

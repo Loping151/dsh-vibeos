@@ -1,0 +1,421 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css (Windows XP "Luna" token block, chrome, .ai-surface controls, native widgets, menu).
+ * Adapted for DeepSeek Harness (dsh-vibeos): selectors re-scoped to #vibeos-root; titlebar height stays the 36px shell constant. Original license: MIT. */
+
+/* Windows XP "Luna" — square, silver-blue, Tahoma. */
+:where(#vibeos-root)[data-skin="xp"] {
+  --radius: 0rem;
+  --font-sans: Tahoma, Verdana, "Segoe UI", sans-serif;
+  --taskbar-h: 30px;
+
+  --background: oklch(0.93 0.015 95);
+  --foreground: oklch(0.18 0 0);
+  --card: oklch(0.99 0.004 95);
+  --card-foreground: oklch(0.18 0 0);
+  --popover: oklch(0.97 0.008 95);
+  --popover-foreground: oklch(0.18 0 0);
+
+  --primary: oklch(0.45 0.15 255);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.9 0.015 95);
+  --secondary-foreground: oklch(0.2 0 0);
+  --muted: oklch(0.9 0.01 95);
+  --muted-foreground: oklch(0.42 0.01 95);
+  --accent: oklch(0.86 0.05 250);
+  --accent-foreground: oklch(0.2 0.05 255);
+  --destructive: oklch(0.55 0.22 27);
+
+  --border: oklch(0.72 0.02 95);
+  --input: oklch(0.99 0.004 95);
+  --ring: oklch(0.5 0.14 255);
+
+  --brand: oklch(0.45 0.15 255);
+  --brand-foreground: oklch(0.99 0 0);
+  /* base (light) values; the dark block below mirrors them
+     pinned so the fixed Luna look survives the dark theme */
+  --run: oklch(0.6 0.15 150);
+  --warn: oklch(0.72 0.15 70);
+  --idle: oklch(0.75 0 0);
+  --desktop: oklch(0.55 0.11 235);
+  --window-titlebar: oklch(0.45 0.15 255);
+  --sheen: rgba(255, 255, 255, 0.5);
+}
+
+/* ---------------------------------- chrome -------------------------------- */
+:where(#vibeos-root)[data-skin="xp"] .vibe-window {
+  /* No frame on the window itself — the title bar and content carry their own borders. */
+  border: 0;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 8px 26px -8px rgba(0, 0, 30, 0.5);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-window.win-glass {
+  background-color: var(--card);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+/* Content frame: 1px #0058EB outer + a 2px #0831D9 inner border drawn on an
+ * ::after overlay so it sits ABOVE the app content. */
+:where(#vibeos-root)[data-skin="xp"] .vibe-window-body {
+  border: 1px solid #0058eb;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-window-body::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2px #0831d9;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-titlebar {
+  padding: 0 4px 0 7px;
+  color: #fff;
+  border: 1px solid #0058eb;
+  border-bottom: 0;
+  border-radius: 8px 8px 0 0;
+  /* solid base + ~5px top highlight (#3F97FF→clear) + bottom band (#004DE3→clear) */
+  background-color: #0055ea;
+  background-image:
+    linear-gradient(to bottom, #3f97ff, rgba(63, 151, 255, 0) 5px),
+    linear-gradient(to top, #004de3, rgba(0, 77, 227, 0) 7px);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-window:not([data-focused]) .vibe-titlebar {
+  background: linear-gradient(to bottom, #9bb6e8, #7f9fd8 50%, #88a6dd);
+  border-color: #92aadd;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-window:not([data-focused]) .vibe-window-body {
+  border-color: #92aadd;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-window:not([data-focused]) .vibe-window-body::after {
+  box-shadow: inset 0 0 0 2px #b3c6ea;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 30, 0.45);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-winbtn {
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: #fff;
+  background: linear-gradient(to bottom, #5b9bff, #1a5fd6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-winbtn:hover {
+  background: linear-gradient(to bottom, #7fb3ff, #2a6fe0);
+  color: #fff;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-winbtn-close {
+  background: linear-gradient(to bottom, #f5856b, #d8401b);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-winbtn-close:hover {
+  background: linear-gradient(to bottom, #ff9d83, #e84e26);
+  color: #fff;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-taskbar {
+  padding: 0;
+  gap: 3px;
+  border-top: 1px solid #095bc9;
+  box-shadow: none;
+  background-color: #255fdc;
+  background-image: linear-gradient(to top, #004de3, rgba(0, 77, 227, 0) 7px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-startbtn {
+  height: 100%;
+  margin: 0 6px 0 0;
+  padding: 0 18px 3px 12px;
+  color: #fff;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 15px;
+  border-radius: 0 16px 16px 0;
+  background: linear-gradient(
+    to bottom,
+    #76c662 0%,
+    #54a83c 8%,
+    #45a032 46%,
+    #3a9a2a 58%,
+    #338f24 92%,
+    #4aa838 100%
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset -2px 0 3px rgba(0, 70, 0, 0.3);
+  text-shadow: 1px 1px 1px rgba(0, 40, 0, 0.5);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-startbtn:hover {
+  background: linear-gradient(
+    to bottom,
+    #86d472 0%,
+    #5cb242 8%,
+    #4aa636 50%,
+    #3f9e2e 92%,
+    #54b242 100%
+  );
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-startbtn[data-open] {
+  box-shadow:
+    inset 1px 1px 4px rgba(0, 50, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-taskitem {
+  height: 22px;
+  color: #fff;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #3f7ce0, #245fd0);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-taskitem[data-active] {
+  background: linear-gradient(to bottom, #1c4ba8, #2a64c8);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 30, 0.4);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-startmenu {
+  border: 2px solid #1559d4;
+  border-radius: 4px 4px 2px 2px;
+  background-color: #fff;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+/* ------------------- form controls inside AI app content ------------------
+   AI apps style controls with inline styles, so these use !important to force
+   the skin's material onto raw <button>/<input>/<select>/<textarea>. */
+:where(#vibeos-root)[data-skin="xp"] .ai-surface button {
+  font-family: Tahoma, "Segoe UI", sans-serif !important;
+  min-height: 23px !important;
+  padding: 2px 12px !important;
+  color: #000 !important;
+  border: 1px solid #003c74 !important;
+  border-radius: 3px !important;
+  background: linear-gradient(
+    to bottom,
+    #fdfefe 0%,
+    #eceadb 47%,
+    #d6d0bf 92%,
+    #e4e0d3 100%
+  ) !important;
+  box-shadow: inset 0 0 0 1px #fff !important;
+}
+:where(#vibeos-root)[data-skin="xp"] .ai-surface button:hover {
+  border-color: #0a246a !important;
+  background: linear-gradient(
+    to bottom,
+    #fff 0%,
+    #f4f2e7 47%,
+    #e0dac9 92%,
+    #efece0 100%
+  ) !important;
+}
+:where(#vibeos-root)[data-skin="xp"] .ai-surface button:active {
+  background: linear-gradient(to bottom, #cdc7b6, #e0dccf) !important;
+  box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+:where(#vibeos-root)[data-skin="xp"] .ai-surface input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+:where(#vibeos-root)[data-skin="xp"] .ai-surface textarea,
+:where(#vibeos-root)[data-skin="xp"] .ai-surface select {
+  font-family: Tahoma, "Segoe UI", sans-serif !important;
+  color: #000 !important;
+  border: 1px solid #7f9db9 !important;
+  border-radius: 0 !important;
+  background: #fff !important;
+  padding: 3px 5px !important;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.14) !important;
+}
+
+/* ------------------- skinned tray widgets + notifications ----------------- */
+:where(#vibeos-root)[data-skin="xp"] .vibe-tray {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  border-radius: 3px;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-tray:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-clock span {
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 30, 0.4);
+}
+/* System tray: lighter recessed area with a 3D groove on its left edge. */
+:where(#vibeos-root)[data-skin="xp"] .vibe-tray-area {
+  margin: 0 0 0 4px;
+  padding: 0 6px;
+  background-color: #1196ea;
+  border-left: 1px solid #00449f;
+  box-shadow: inset 1px 0 0 #1ccbf4;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-notif {
+  color: #101b2e;
+  border: 1px solid #8a8868;
+  border-radius: 4px;
+  background-color: #fffdea;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: 1px 2px 7px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------- native system-app controls --------------------------- */
+:where(#vibeos-root)[data-skin="xp"] .vibe-group {
+  border: 1px solid #919b9c;
+  border-radius: 0;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-btn,
+:where(#vibeos-root)[data-skin="xp"] .vibe-combo {
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  color: #000;
+  border: 1px solid #003c74;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #fdfefe 0%, #eceadb 47%, #d6d0bf 92%, #e4e0d3 100%);
+  box-shadow: inset 0 0 0 1px #fff;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-btn:hover,
+:where(#vibeos-root)[data-skin="xp"] .vibe-combo:hover {
+  border-color: #0a246a;
+  background: linear-gradient(to bottom, #fff 0%, #f4f2e7 47%, #e0dac9 92%, #efece0 100%);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-select,
+:where(#vibeos-root)[data-skin="xp"] .vibe-input {
+  font-family: Tahoma, "Segoe UI", sans-serif;
+  border: 1px solid #7f9db9;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.14);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-segmented {
+  border-radius: 0;
+  padding: 1px;
+  background: #ece9d8;
+  box-shadow: inset 0 0 0 1px #919b9c;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-seg-btn {
+  border-radius: 0;
+  color: #000;
+  box-shadow: none;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-seg-btn[data-active] {
+  color: #fff;
+  background: linear-gradient(to bottom, #2f6fdc, #1c54c4);
+}
+/* switch → XP checkbox */
+:where(#vibeos-root)[data-skin="xp"] .vibe-switch {
+  width: 13px;
+  height: 13px;
+  border-radius: 0;
+  border: 1px solid #7f9db9;
+  background: #fff;
+  box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.15);
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-switch-knob {
+  display: none;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-switch[aria-checked="true"] {
+  background: #fff;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-switch[aria-checked="true"]::after {
+  content: "✔";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1559d4;
+}
+
+/* ------------------- context menu ----------------------------------------- */
+/* classic flat white menu with a blue highlight bar, Tahoma. */
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu {
+  border: 1px solid #8a9099;
+  border-radius: 0;
+  padding: 2px;
+  background: #fff;
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.35);
+  font-family: Tahoma, "Segoe UI", sans-serif;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-item {
+  border-radius: 0;
+  padding: 4px 10px 4px 6px;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-item:hover,
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-item[data-active="true"] {
+  background: #1660d4;
+  color: #fff;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-item[data-danger="true"]:hover,
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-item[data-danger="true"][data-active="true"] {
+  background: #c1272d;
+}
+:where(#vibeos-root)[data-skin="xp"] .vibe-menu-sep {
+  background: #c3c7cd;
+  margin: 3px 6px 3px 26px;
+}
+
+
+/* ---- XP cursors: pixel arrow + hourglass while busy ---------------------- */
+:where(#vibeos-root)[data-skin="xp"],
+:where(#vibeos-root)[data-skin="xp"] .vibe-window,
+:where(#vibeos-root)[data-skin="xp"] .ai-surface {
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PHBhdGggZD0iTTQgMiBMNCAxOCBMOCAxNC41IEwxMSAyMSBMMTQgMTkuNSBMMTEgMTMgTDE2LjUgMTMgWiIgZmlsbD0iI2ZmZmZmZiIgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==') 3 2, default;
+}
+:where(#vibeos-root)[data-skin="xp"] .ai-surface[data-busy],
+:where(#vibeos-root)[data-skin="xp"] .vibe-window[data-busy],
+:where(#vibeos-root)[data-skin="xp"] .vibe-window[data-busy] .ai-surface {
+  cursor: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCI+PGcgc3Ryb2tlPSIjMDAwMDAwIiBzdHJva2Utd2lkdGg9IjEuMiIgZmlsbD0iI2ZmZmZmZiI+PHJlY3QgeD0iNiIgeT0iMiIgd2lkdGg9IjEyIiBoZWlnaHQ9IjMiLz48cmVjdCB4PSI2IiB5PSIxOSIgd2lkdGg9IjEyIiBoZWlnaHQ9IjMiLz48cGF0aCBkPSJNOCA1IEwxNiA1IEwxNiA4IEwxMiAxMiBMOCA4IFoiIGZpbGw9IiNiZmUwZmYiLz48cGF0aCBkPSJNOCAxOSBMMTYgMTkgTDE2IDE2IEwxMiAxMiBMOCAxNiBaIiBmaWxsPSIjYmZlMGZmIi8+PC9nPjwvc3ZnPg==') 12 12, wait;
+}
+
+
+/* ---- XP dark ("Royale Noir"): the Luna geometry, night palette ----------- */
+:where(#vibeos-root).vibe-dark[data-skin="xp"] {
+  --background: #1b1d22;
+  --foreground: #e8ebf0;
+  --card: #23262c;
+  --card-foreground: #e8ebf0;
+  --popover: #23262c;
+  --popover-foreground: #e8ebf0;
+  --muted: #2a2e35;
+  --muted-foreground: #a8b0bd;
+  --accent: #2f3a4d;
+  --accent-foreground: #dce6f7;
+  --secondary: #2a2e35;
+  --secondary-foreground: #e8ebf0;
+  --border: #3a4049;
+  --input: #23262c;
+  --primary: #3d7be0;
+  --primary-foreground: #ffffff;
+  --brand: #5b9dff;
+  --brand-foreground: #0d1220;
+  --ring: #5b9dff;
+  --idle: #555c68;
+  --desktop: #15181d;
+  --window-titlebar: #262a31;
+  --sheen: rgba(255, 255, 255, 0.06);
+}
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-titlebar {
+  background: linear-gradient(to bottom, #3a4657 0%, #2b3444 45%, #222a37 100%);
+  border-bottom: 1px solid #10141c;
+  color: #eef2f8;
+}
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-taskbar {
+  background: linear-gradient(to bottom, #2b3444, #1d2430);
+  border-top: 1px solid #10141c;
+}
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-startbtn {
+  background: linear-gradient(to bottom, #2e6b3a, #1f4d29);
+  border-color: #143620;
+}
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-notif {
+  background-color: #2a2b26;
+  color: #f0efe4;
+  border-color: #4a4838;
+}
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-menu,
+:where(#vibeos-root).vibe-dark[data-skin="xp"] .vibe-startmenu {
+  background: #23262c;
+  color: #e8ebf0;
+  border-color: #3a4049;
+}

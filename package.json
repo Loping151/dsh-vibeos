@@ -1,0 +1,112 @@
+{
+  "name": "dsh-vibeos",
+  "description": "VibeOS for DeepSeek Harness: a model-driven virtual desktop that takes over the DSH web UI — AI-generated app windows, taskbar, spotlight, skins — with classic chat one toggle away. Port of benis-me/VibeOS.",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "src",
+    "tsconfig.json",
+    "tsdown.config.ts",
+    "cordis.patch.yml",
+    "README.md",
+    "README.en.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "deepseek-harness",
+    "plugin",
+    "vibeos",
+    "generative-ui",
+    "desktop"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "dompurify": "^3.4.0",
+    "react": "^18.3.1",
+    "schemastery": "^3.18.0",
+    "ws": "^8.21.0",
+    "zod": "^4.0.0",
+    "zustand": "^5.0.0"
+  },
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent-default-model": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-client-ui-theme": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-host-webserver": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-invariants": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-llm": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-storage-domain": "^0.1.0-rc.6",
+    "@deepseek-ai/dsh-timeout": "^0.1.0-rc.6",
+    "react": "^18.0.0 || ^19.0.0",
+    "@deepseek-ai/dsh-client-ui-settings": "^0.1.0-rc.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.0",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.0.0",
+    "@types/node": "^22.19.0",
+    "@types/react": "^18.3.18",
+    "@types/react-dom": "^18.3.5",
+    "@types/ws": "^8.5.12",
+    "jsdom": "^25.0.0",
+    "lightningcss": "^1.25.0",
+    "react-dom": "^18.3.1",
+    "tsdown": "^0.22.2",
+    "typescript": "^5.6.0",
+    "vitest": "^3.0.0"
+  },
+  "scripts": {
+    "build": "rm -rf lib && tsc -p tsconfig.json && node scripts/build-css.mjs && tsdown",
+    "test": "vitest run",
+    "check": "rm -rf lib && tsc -p tsconfig.json && vitest run && node scripts/build-css.mjs && tsdown",
+    "prepack": "node scripts/prepack.mjs",
+    "verify-pack": "node scripts/verify-pack.mjs"
+  },
+  "dsh": {
+    "client": {
+      "platform": "web",
+      "inject": []
+    },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "packageManager": "pnpm@10.14.0",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Loping151/dsh-vibeos.git"
+  },
+  "homepage": "https://github.com/Loping151/dsh-vibeos",
+  "bugs": {
+    "url": "https://github.com/Loping151/dsh-vibeos/issues"
+  }
+}

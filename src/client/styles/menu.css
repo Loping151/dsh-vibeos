@@ -1,0 +1,85 @@
+/* Derived from VibeOS (https://github.com/benis-me/VibeOS) — apps/frontend/src/styles/globals.css (CONTEXT MENU block).
+ * Adapted for DeepSeek Harness (dsh-vibeos): re-scoped to #vibeos-root (the menu portals inside our container, never document.body). Original license: MIT. */
+
+:where(#vibeos-root) .vibe-menu {
+  position: fixed;
+  z-index: 99999;
+  min-width: 184px;
+  max-width: 300px;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 0.9);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow:
+    0 12px 32px -10px rgba(0, 0, 0, 0.45),
+    0 0 0 0.5px rgba(0, 0, 0, 0.05);
+  font-size: 13px;
+  user-select: none;
+  animation: vibe-menu-in 0.09s ease-out;
+}
+@keyframes vibe-menu-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :where(#vibeos-root) .vibe-menu {
+    animation: none;
+  }
+}
+:where(#vibeos-root) .vibe-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 8px 6px 6px;
+  border-radius: calc(var(--radius) * 0.6);
+  text-align: left;
+  color: inherit;
+  cursor: default;
+  line-height: 1.2;
+}
+:where(#vibeos-root) .vibe-menu-item:hover,
+:where(#vibeos-root) .vibe-menu-item[data-active="true"] {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+:where(#vibeos-root) .vibe-menu-item[data-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+:where(#vibeos-root) .vibe-menu-item[data-danger="true"]:hover,
+:where(#vibeos-root) .vibe-menu-item[data-danger="true"][data-active="true"] {
+  background: var(--destructive);
+  color: #fff;
+}
+:where(#vibeos-root) .vibe-menu-icon {
+  display: flex;
+  width: 16px;
+  flex: none;
+  justify-content: center;
+  opacity: 0.85;
+}
+:where(#vibeos-root) .vibe-menu-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+:where(#vibeos-root) .vibe-menu-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 14px;
+  opacity: 0.6;
+  font-size: 11px;
+}
+:where(#vibeos-root) .vibe-menu-sep {
+  height: 1px;
+  margin: 4px 6px;
+  background: var(--border);
+}
