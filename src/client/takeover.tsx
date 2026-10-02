@@ -6,7 +6,7 @@
 
 import type { ReactNode } from 'react';
 import type { Context } from '@deepseek-ai/cordis';
-import type {} from '@deepseek-ai/dsh-client-runtime/client';
+import type {} from '@deepseek-ai/dsh-client-ui-renderer/client';
 import type {} from '@deepseek-ai/dsh-client-ui-layout/client';
 import { useConnectionStore } from './stores/connectionStore';
 import { useSettingsStore } from './stores/settingsStore';

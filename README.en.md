@@ -25,6 +25,8 @@ any app you can name: open it and it exists.
 
 ## Install
 
+Tested with DSH `0.1.0-rc.7` and `0.2.0-rc.2`; requires Node.js 22.19+ or 24+.
+
 Linux / macOS:
 
 ```sh
@@ -74,6 +76,17 @@ Models follow the DSH default and prefer the flash tier; override per role (UI /
 
 Everything lives in `~/.dsh/storages/vibeos_*.json` and `vibeos-images/`; no sessions are created,
 nothing touches your chat history. Delete the files for a factory reset.
+
+## Development and testing
+
+```sh
+pnpm install
+pnpm check
+pnpm verify-pack
+pnpm test:e2e
+```
+
+The build uses locked DSH development dependencies and checks Host and Client types separately. The e2e test uses `dsh` from PATH, boots an isolated temporary `DSH_HOME` with model calls disabled, and removes its process, sessions and storage. Set `DSH_BIN` and `DSH_RUNTIME_MODULES` to test another installation.
 
 ## Credits
 

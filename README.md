@@ -23,6 +23,8 @@
 
 ## 安装
 
+已验证 DSH `0.1.0-rc.7` 与 `0.2.0-rc.2`，需要 Node.js 22.19+ 或 24+。
+
 Linux / macOS：
 
 ```sh
@@ -65,6 +67,17 @@ dsh plugin --profile web add file:.
 ## 数据
 
 全部状态在 `~/.dsh/storages/vibeos_*.json` 与 `vibeos-images/`；不建会话、不进聊天记录，删除即出厂。
+
+## 开发与测试
+
+```sh
+pnpm install
+pnpm check
+pnpm verify-pack
+pnpm test:e2e
+```
+
+构建直接使用锁文件里的 DSH 开发依赖，Host 与 Client 分别检查类型。端到端测试使用 PATH 中的 `dsh`，在临时 `DSH_HOME` 中启动关闭模型调用的独立实例，并自动清理进程、会话和存储。测试其他安装可设置 `DSH_BIN` 与 `DSH_RUNTIME_MODULES`。
 
 ## 致谢
 

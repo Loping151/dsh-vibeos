@@ -17,6 +17,12 @@ import {
   createUserMessage,
 } from '@deepseek-ai/dsh-llm/message';
 
+declare module '@deepseek-ai/dsh-llm/message' {
+  interface MessageSourceMap {
+    'dsh-vibeos': { kind: 'dsh-vibeos' };
+  }
+}
+
 export interface LlmRunOptions {
   system: string;
   prompt: string;
@@ -57,7 +63,7 @@ export async function runLlm(ctx: Context, o: LlmRunOptions): Promise<LlmRunResu
   const messages: Message[] = [
     createUserMessage({
       content: [{ type: 'text', text: o.prompt }],
-      source: { kind: 'plugin', plugin: 'dsh-vibeos' },
+      source: { kind: 'dsh-vibeos' },
     }),
   ];
   const totals = { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, reasoning: 0, seen: false };

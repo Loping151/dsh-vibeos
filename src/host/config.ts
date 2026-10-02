@@ -1,4 +1,4 @@
-import Schema from 'schemastery';
+import Schema from '@deepseek-ai/schemastery';
 
 /* Schema frozen by ARCHITECTURE.md §B.2. Workstream E owns boot-time normalization. */
 

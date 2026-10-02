@@ -10,8 +10,8 @@ export declare const notificationKindSchema: z.ZodEnum<{
     warning: "warning";
 }>;
 export declare const vfsLocationSchema: z.ZodEnum<{
-    desktop: "desktop";
     folder: "folder";
+    desktop: "desktop";
     recyclebin: "recyclebin";
 }>;
 export declare const syscallSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
@@ -45,8 +45,8 @@ export declare const syscallSchema: z.ZodDiscriminatedUnion<[z.ZodObject<{
     mime: z.ZodOptional<z.ZodString>;
     content: z.ZodOptional<z.ZodString>;
     location: z.ZodOptional<z.ZodEnum<{
-        desktop: "desktop";
         folder: "folder";
+        desktop: "desktop";
         recyclebin: "recyclebin";
     }>>;
 }, z.core.$strip>, z.ZodObject<{
@@ -91,8 +91,8 @@ export declare const syscallBatchSchema: z.ZodObject<{
         mime: z.ZodOptional<z.ZodString>;
         content: z.ZodOptional<z.ZodString>;
         location: z.ZodOptional<z.ZodEnum<{
-            desktop: "desktop";
             folder: "folder";
+            desktop: "desktop";
             recyclebin: "recyclebin";
         }>>;
     }, z.core.$strip>, z.ZodObject<{

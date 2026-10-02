@@ -3,7 +3,7 @@
  * reverted through the fiber effect (classic toggle, HMR drain, plugin disable). */
 
 import type { Context } from '@deepseek-ai/cordis';
-import type {} from '@deepseek-ai/dsh-client-runtime/client';
+import type {} from '@deepseek-ai/dsh-client-ui-renderer/client';
 import type {} from '@deepseek-ai/dsh-client-ui-theme/client';
 import type {} from '@deepseek-ai/dsh-client-ui-settings/client';
 

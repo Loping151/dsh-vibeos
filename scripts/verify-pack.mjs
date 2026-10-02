@@ -27,7 +27,7 @@ for (const entry of Object.values(pkgJson.exports)) {
 
 const required = [
   'package.json', 'LICENSE', 'README.md', 'README.en.md', 'CHANGELOG.md', 'cordis.patch.yml',
-  'src/index.ts', 'src/client/index.tsx', 'tsconfig.json', 'tsdown.config.ts',
+  'src/index.ts', 'src/client/index.tsx', 'tsconfig.json', 'tsconfig.host.json', 'tsconfig.client.json', 'tsdown.config.ts',
   ...exportTargets,
 ]
 

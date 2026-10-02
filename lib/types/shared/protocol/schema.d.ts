@@ -11,12 +11,12 @@ export declare const clientToServerSchema: z.ZodDiscriminatedUnion<[z.ZodObject<
         windowId: z.ZodString;
         op: z.ZodObject<{
             kind: z.ZodEnum<{
-                custom: "custom";
                 click: "click";
                 input: "input";
                 submit: "submit";
                 change: "change";
                 key: "key";
+                custom: "custom";
             }>;
             action: z.ZodOptional<z.ZodString>;
             sel: z.ZodOptional<z.ZodString>;
@@ -101,8 +101,8 @@ export declare const clientToServerSchema: z.ZodDiscriminatedUnion<[z.ZodObject<
     payload: z.ZodObject<{
         nodeId: z.ZodString;
         location: z.ZodEnum<{
-            desktop: "desktop";
             folder: "folder";
+            desktop: "desktop";
             recyclebin: "recyclebin";
         }>;
         x: z.ZodOptional<z.ZodNumber>;

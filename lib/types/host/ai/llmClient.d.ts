@@ -1,5 +1,12 @@
 import type { Context } from '@deepseek-ai/cordis';
 import type { ToolSchema } from '@deepseek-ai/dsh-llm';
+declare module '@deepseek-ai/dsh-llm/message' {
+    interface MessageSourceMap {
+        'dsh-vibeos': {
+            kind: 'dsh-vibeos';
+        };
+    }
+}
 export interface LlmRunOptions {
     system: string;
     prompt: string;

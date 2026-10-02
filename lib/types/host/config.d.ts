@@ -1,4 +1,4 @@
-import Schema from 'schemastery';
+import Schema from '@deepseek-ai/schemastery';
 export interface ModelRefConfig {
     provider?: string;
     model?: string;

@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1
+
+- Support the DSH 0.2 client renderer and package compatibility checks while retaining rc.7 runtime support.
+- Use the scoped DSH config schema and producer-owned message source.
+- Build Host and Client declarations separately from locked development dependencies, without a local `~/.dsh` path.
+- Run end-to-end checks in a temporary profile, using the browser cookie exchange and manifest bundle URLs when required; clean up all test state.
+
 ## 0.1.0
 
 First release: a port of [VibeOS](https://github.com/benis-me/VibeOS) (MIT, by @benis-me) into a
